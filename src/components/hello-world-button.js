@@ -12,6 +12,7 @@ class helloWorldButton {
             p.classList.add('hello-world-text');
             body.appendChild(p);
         };
+
         body.appendChild(button);
     }
 }

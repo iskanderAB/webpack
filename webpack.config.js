@@ -1,11 +1,14 @@
 const path = require('path');
-const TerserPlugin = require("terser-webpack-plugin");
+const TerserPlugin = require("terser-webpack-plugin"); // minimisation js
+const MinicssExtractPlugin = require("mini-css-extract-plugin");
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 module.exports = {
     entry: './src/index.js',
     output: {
-        filename: "bundle.js",
+        filename: "bundle.[contenthash].js",
         path: path.resolve(__dirname,"./dist"),
-        publicPath: "dist/" // use current url of ur server pre expl https/lien
+        publicPath: "" // use current url of ur server pre expl https/lien
     },
     mode :'none',
     module: {
@@ -19,13 +22,13 @@ module.exports = {
             {
                 test:/\.css$/,
                 use: [
-                    'style-loader','css-loader'
+                    MinicssExtractPlugin.loader,'css-loader'
                 ]
             },
             {
                 test:/\.scss$/,
                 use:[
-                    'style-loader','css-loader','sass-loader'
+                    MinicssExtractPlugin.loader,'css-loader','sass-loader'
                 ]
             },
             {
@@ -43,6 +46,12 @@ module.exports = {
         ]
     },
     plugins: [
-        new TerserPlugin()
+        new TerserPlugin(),
+        new CleanWebpackPlugin(),
+        new MinicssExtractPlugin({
+            filename: 'style.[contenthash].css'
+        }),
+        new HtmlWebpackPlugin(),
+
     ]
 }
