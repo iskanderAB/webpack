@@ -1,0 +1,18 @@
+$font-size: 20px ;
+$color-back : green ;
+$color : red ;
+.hello-world-button {
+    width: 300px;
+    background-color: $color-back;
+    text-align: center;
+    padding: 7px;
+    font-family: sans-serif ;
+    font-size: large;
+    color: white;
+}
+.hello-world-text{
+    color: $color;
+    font-size: $font-size;
+    font-weight: bold;
+}
+
